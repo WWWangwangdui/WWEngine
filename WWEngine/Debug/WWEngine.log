@@ -1,0 +1,3 @@
+﻿  WWwindow.cpp
+E:\WWEngine\WWEngine\WWEngine\WWwindow.h(26,2): warning C4091: “static ”: 没有声明变量时忽略“WWframe”的左侧
+  WWEngine.vcxproj -> E:\WWEngine\WWEngine\Debug\WWEngine.exe
