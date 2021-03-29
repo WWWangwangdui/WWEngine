@@ -60,7 +60,11 @@ void WWwindow::WWinitWnd(HINSTANCE hInstance)
 	);
 	if (WWhWnd == NULL)
 	{
-		exit(-1);
+#ifdef _DEBUG
+		WWERROR("创建窗口失败");
+#endif
+		WWLOG("创建窗口失败");
+		PostQuitMessage(-1);
 	}
 	//更新窗口
 	UpdateWindow(WWhWnd);
@@ -118,6 +122,13 @@ HWND WWwindow::WWgetHWnd()
 
 void WWwindow::WWsetSize(WWINT WWsizeX, WWINT WWsizeY)
 {
+	if (WWsizeX <= 0 || WWsizeX > WWscreenSizeX || WWsizeY <= 0 || WWsizeY > WWscreenSizeY)
+	{
+#ifdef _DEBUG
+		WWDEBUG("数字输入超限");
+#endif
+		return;
+	}
 	WWwindowSizeX = WWsizeX;
 	WWwindowSizeY = WWsizeY;
 	WWMoveWindow();
@@ -132,6 +143,13 @@ WWINT WWwindow::WWgetSize(WWSEL WWselect)
 
 void WWwindow::WWsetPos(WWINT WWposX, WWINT WWposY)
 {
+	if (WWposX <= 0 || WWposX > WWscreenSizeX || WWposY <= 0 || WWposY > WWscreenSizeY)
+	{
+#ifdef _DEBUG
+		WWDEBUG("数字输入超限");
+#endif
+		return;
+	}
 	WWwindowPosX = WWposX;
 	WWwindowPosY = WWposY;
 	WWMoveWindow();

@@ -10,6 +10,7 @@
 #include<iostream>
 #include<atlbase.h>
 #include<atlstr.h>
+#include<ctime>
 #include"WWdefine.h"
 /// <summary>
 /// WWframe类为提供主窗体框架的静态类，其功能主要包含窗体的回调函数、窗体的消息循环
