@@ -21,6 +21,15 @@
     <ClCompile Include="WWwindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="WWasCtrl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWmoduleBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWobject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWwindow.h">
@@ -30,6 +39,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="WWtype.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWasCtrl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWmoduleBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWobject.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
