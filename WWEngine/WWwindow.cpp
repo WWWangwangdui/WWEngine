@@ -6,6 +6,23 @@
 /// 文档描述：主窗体模块的源文件
 /// </summary>
 #include "WWwindow.h"
+template<class Interface>
+inline void SafeDelete(
+	Interface** ppInterfaceToRelease
+)
+{
+
+	if (*ppInterfaceToRelease != NULL)
+	{
+		delete (*ppInterfaceToRelease);
+		(*ppInterfaceToRelease) = NULL;
+	}
+	else
+	{
+		WWDEBUG("要释放的指针为空");
+	}
+}
+
 void WWwindow::WWMoveWindow()
 {
 	MoveWindow(WWhWnd, WWwindowPosX, WWwindowPosY, WWwindowSizeX, WWwindowSizeY, TRUE);
