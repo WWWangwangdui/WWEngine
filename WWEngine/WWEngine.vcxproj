@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -114,7 +115,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -139,11 +140,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="WWasCtrl.cpp" />
+    <ClCompile Include="WWcamera.cpp" />
     <ClCompile Include="WWmain.cpp" />
+    <ClCompile Include="WWmoduleBase.cpp" />
+    <ClCompile Include="WWobject.cpp" />
+    <ClCompile Include="WWrenderer.cpp" />
+    <ClCompile Include="WWrenderUnit.cpp" />
     <ClCompile Include="WWwindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WWasCtrl.h" />
+    <ClInclude Include="WWcamera.h" />
     <ClInclude Include="WWdefine.h" />
+    <ClInclude Include="WWmoduleBase.h" />
+    <ClInclude Include="WWobject.h" />
+    <ClInclude Include="WWrenderer.h" />
+    <ClInclude Include="WWrenderUnit.h" />
     <ClInclude Include="WWtype.h" />
     <ClInclude Include="WWwindow.h" />
   </ItemGroup>
