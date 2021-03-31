@@ -12,6 +12,7 @@
 class WWobject
 {
 private:
+	//
 	std::vector<WWmoduleBase*> WWmodules;
 	std::vector<WWobject*> WWchildObject;
 	WWINT WWobjectID;
@@ -26,6 +27,7 @@ public:
 	void deleteAll();
 
 	//在对象中查找组件
+	
 	WWmoduleBase* findModule(WWmoduleBase* module);
 	//添加组件
 	void virtual AddModule(WWmoduleBase *module);
@@ -52,4 +54,6 @@ public:
 	void load(FILE* fp);
 	//初始化
 	void init(FILE* fp);
+
+	WWmoduleBase* WWgetMoudule(WWSTR modulename);
 };

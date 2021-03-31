@@ -1,4 +1,3 @@
-
 #include"WWobject.h"
 WWobject::WWobject()
 {
@@ -110,5 +109,10 @@ void WWobject::load(FILE* fp)
 
 void WWobject::init(FILE* fp)
 {
+}
+
+WWmoduleBase* WWobject::WWgetMoudule(WWSTR modulename)
+{
+	return nullptr;
 }
 

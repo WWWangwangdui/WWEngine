@@ -30,6 +30,15 @@
     <ClCompile Include="WWobject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="WWrenderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWcamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWrenderUnit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWwindow.h">
@@ -48,6 +57,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="WWobject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWrenderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWcamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWrenderUnit.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -33,11 +33,16 @@
 
 #define WWDEBUG(x) WWframe::debug(__FILE__,__LINE__,x)	
 #define WWERROR(x) WWframe::error(__FILE__,__LINE__,x)	
-#define WWLOG(x) WWframe::WWlog(__FILE__,__LINE__,x)
 #define WWNEWLINE WWframe::WWlogNewLine()
+
+#else
+#define WWDEBUG(x)
+#define WWERROR(x)
+#define WWNEWLINE
 
 #endif // _DEBUG
 
+#define WWLOG(x) WWframe::WWlog(__FILE__,__LINE__,x)
 
 
 /*******************************************************************************************
@@ -55,7 +60,9 @@ typedef double		WWDB			;		//
 typedef long long	WWLL			;		//
 typedef char		WWCH			;		//
 typedef bool		WWBOOL			;		//
+typedef wchar_t		WWWCH			;		//unicode编码的字符
 typedef int			WWSEL			;		//该类型的含义为选择，例如作为WWwindow::WWgetSize的参数时代表获取窗口的宽度还是高度，其值通常使用宏定义
-typedef CString		WWSTR			;		//Unicode编码的字符串
+typedef const wchar_t*	WWSTR		;		//Unicode编码的字符串
 typedef ID2D1Bitmap*WWBIT			;		//用于渲染器使用的位图对象
 typedef CFile		WWSOUND			;		//存储音乐的内存类
+typedef POINT		WWPT			;		//描述一个二维坐标点	
