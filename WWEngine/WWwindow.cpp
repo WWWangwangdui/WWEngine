@@ -6,26 +6,13 @@
 /// 文档描述：主窗体模块的源文件
 /// </summary>
 #include "WWwindow.h"
-template<class Interface>
-inline void SafeDelete(
-	Interface** ppInterfaceToRelease
-)
-{
-
-	if (*ppInterfaceToRelease != NULL)
-	{
-		delete (*ppInterfaceToRelease);
-		(*ppInterfaceToRelease) = NULL;
-	}
-	else
-	{
-		WWDEBUG("要释放的指针为空");
-	}
-}
+WWCH* WWframe::WWtime = new WWCH[100];
+const WWCH* WWframe::WWlogPath = "log.txt";
+FILE* WWframe::WWlogPtr;
 
 void WWwindow::WWMoveWindow()
 {
-	MoveWindow(WWhWnd, WWwindowPosX, WWwindowPosY, WWwindowSizeX, WWwindowSizeY, TRUE);
+	MoveWindow(WWhWnd, WWwindowPosX, WWwindowPosY, ceil(WWwindowSizeX * WWdpi / 96.0), ceil(WWwindowSizeY * WWdpi / 96.0), TRUE);
 }
 
 WWwindow::WWwindow()
@@ -38,6 +25,7 @@ WWwindow::WWwindow()
 	WWwindowSizeX = 900, WWwindowSizeY = 600;
 	WWscreenSizeX = GetSystemMetrics(SM_CXSCREEN), WWscreenSizeY = GetSystemMetrics(SM_CYSCREEN);
 	WWwindowPosX = (WWscreenSizeX - WWwindowSizeX) / 2, WWwindowPosY = (WWscreenSizeY - WWwindowSizeY) / 2;
+	WWdpi = GetDpiForWindow(GetDesktopWindow());
 	//默认鼠标为IDC_ARROW
 	strcpy(WWcursorPath, "NULL");
 	//默认标题为WWEngine
@@ -68,8 +56,8 @@ void WWwindow::WWinitWnd(HINSTANCE hInstance)
 		WWwindowStyle,
 		WWwindowPosX,
 		WWwindowPosY,
-		WWwindowSizeX,
-		WWwindowSizeY,
+		ceil(WWwindowSizeX * WWdpi / 96.0),
+		ceil(WWwindowSizeY * WWdpi / 96.0),
 		NULL,
 		NULL,
 		hInstance,
@@ -285,14 +273,15 @@ LRESULT WWframe::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	// 消息分发
 	switch (uMsg)
 	{
-	case WM_LBUTTONDOWN:
-		throw std::string("click");
 	case WM_SIZE:
+		WWrenderer::WWreSize();
 		break;
 	case WM_CLOSE:
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+	case WM_PAINT:
+		WWrenderer::update();
 	default:
 		break;
 	}

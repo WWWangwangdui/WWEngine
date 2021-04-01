@@ -28,3 +28,14 @@ File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 38 Time: 2021/3/31 16:14:7 
 File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 39 Time: 2021/3/31 16:14:7 Info: click
 
 
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 22 Time: 2021/3/31 21:22:55 Info: 程序启动
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 38 Time: 2021/3/31 21:22:55 Info: 程序异常结束,错误信息：
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 39 Time: 2021/3/31 21:22:55 Info: click
+
+
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 22 Time: 2021/3/31 21:23:42 Info: 程序启动
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 22 Time: 2021/3/31 21:24:47 Info: 程序启动
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 22 Time: 2021/3/31 21:28:48 Info: 程序启动
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 22 Time: 2021/3/31 21:34:35 Info: 程序启动
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 31 Time: 2021/3/31 21:38:25 Info: 程序启动
+File: E:\WWEngine\WWEngine\WWEngine\WWmain.cpp Line: 31 Time: 2021/3/31 22:14:55 Info: 程序启动

@@ -11,12 +11,12 @@ void WWobject::WWover()
 
 
 
-void WWobject::deleteAll()
+void WWobject::WWdeleteAll()
 {
-	
+
 }
 
-WWmoduleBase* WWobject::findModule(WWmoduleBase* module)
+WWmoduleBase* WWobject::WWfindModule(WWmoduleBase* module)
 {
 	for (auto it = WWmodules.begin(); it != WWmodules.end(); it++)
 	{
@@ -29,17 +29,17 @@ WWmoduleBase* WWobject::findModule(WWmoduleBase* module)
 	WWDEBUG("在对象中未找到该组件");
 #endif
 	return NULL;
-	
+
 }
 
-void WWobject::AddModule(WWmoduleBase *module)
+void WWobject::WWaddModule(WWmoduleBase* module)
 {
 	WWmodules.push_back(module);
 }
 
-void WWobject::RemoveModule(WWmoduleBase* module)
+void WWobject::WWremoveModule(WWmoduleBase* module)
 {
-	for (auto it = WWmodules.begin(); it!=WWmodules.end() ; it++)
+	for (auto it = WWmodules.begin(); it != WWmodules.end(); it++)
 	{
 		if (*it == module)
 		{
@@ -50,15 +50,31 @@ void WWobject::RemoveModule(WWmoduleBase* module)
 #ifdef _DEBUG
 	WWDEBUG("不存在该组件，无法删除");
 #endif
-	
+
 }
 
-void WWobject::SetModuleActive(WWmoduleBase *module,WWSEL sel)
+void WWobject::WWremoveModule(WWSTR modulename)
 {
-	WWmoduleBase* tmp = findModule(module);
+	for (auto it = WWmodules.begin(); it != WWmodules.end(); it++)
+	{
+		if ((*it)->WWgetModuleName() == modulename)
+		{
+			WWmodules.erase(it);
+			return;
+		}
+	}
+#ifdef _DEBUG
+	WWDEBUG("不存在该组件，无法删除");
+#endif
+
+}
+
+void WWobject::WWsetModuleActive(WWmoduleBase* module, WWSEL sel)
+{
+	WWmoduleBase* tmp = WWfindModule(module);
 	if (tmp != NULL)
 	{
-		tmp->SetModuleActivity(sel);
+		tmp->WWsetModuleActivity(sel);
 		return;
 	}
 #ifdef _DEBUG
@@ -66,53 +82,76 @@ void WWobject::SetModuleActive(WWmoduleBase *module,WWSEL sel)
 #endif
 }
 
-void WWobject::SetObjectActive(WWSEL sel)
+void WWobject::WWsetObjectActive(WWSEL sel)
 {
 	WWactivity = sel;
 }
 
-void WWobject::update()
+void WWobject::WWsetObjectActive(WWSTR modulename, WWSEL sel)
+{
+	WWmoduleBase* tmp = WWgetMoudule(modulename);
+	if (tmp != NULL) tmp->WWsetModuleActivity(sel);
+	else
+	{
+#ifdef _DEBUG
+		WWDEBUG("在对象中未找到该组件");
+#endif
+	}
+
+}
+
+void WWobject::WWupdate()
 {
 	if (!WWactivity) return;
 	for (auto it = WWchildObject.begin(); it != WWchildObject.end(); it++)
 	{
-		(*it)->update();
+		(*it)->WWupdate();
 	}
 	for (auto it = WWmodules.begin(); it != WWmodules.end(); it++)
 	{
-		(*it)->update();
+		(*it)->WWupdate();
 	}
 }
 
-void WWobject::saveObject(FILE* fp)
+void WWobject::WWsaveObject(FILE* fp)
 {
-	fprintf(fp, "%d ", WWobjectID);
+	/*fprintf(fp, "%d ", WWobjectID);
 	for (auto it = WWchildObject.begin(); it != WWchildObject.end(); it++)
 	{
-		(*it)->saveObject(fp);
+		(*it)->WWsaveObject(fp);
 		fprintf(fp, "end");
-	}
-	
+	}*/
+
 }
 
-void WWobject::saveModule(FILE* fp)
+void WWobject::WWsaveModule(FILE* fp)
 {
-	for (auto it : WWmodules)
+	/*for (auto it : WWmodules)
 	{
-		it->save(fp);
-	}
+		it->WWsave(fp);
+	}*/
 }
 
-void WWobject::load(FILE* fp)
+void WWobject::WWload(FILE* fp)
 {
 }
 
-void WWobject::init(FILE* fp)
+void WWobject::WWinit(FILE* fp)
 {
 }
 
 WWmoduleBase* WWobject::WWgetMoudule(WWSTR modulename)
 {
-	return nullptr;
+	for (auto it = WWmodules.begin(); it != WWmodules.end(); it++)
+	{
+		if ((*it)->WWgetModuleName() == modulename)
+		{
+			return *it;
+		}
+	}
+#ifdef _DEBUG
+	WWDEBUG("在对象中未找到该组件");
+#endif
+	return NULL;
 }
 

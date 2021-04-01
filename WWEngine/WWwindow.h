@@ -6,19 +6,13 @@
 /// 文档描述：主窗体模块的头文件
 /// </summary>
 #pragma once
-#include <afx.h>
+#include<afx.h>
 #include <d2d1.h>
 #include<iostream>
 #include<ctime>
+#include"WWrenderer.h"
 #include"WWtype.h"
 #include"WWdefine.h"
-/// <summary>
-/// 安全释放内存
-/// </summary>
-/// <typeparam name="Interface">指针类型</typeparam>
-/// <param name="ppInterfaceToRelease">要释放的指针的指针</param>
-template<class Interface>
-inline void SafeDelete(Interface** ppInterfaceToRelease);
 /// <summary>
 /// WWframe类为提供主窗体框架的静态类，其功能主要包含窗体的回调函数、窗体的消息循环
 /// 在_DEBUG模式下，该类还会提供用于调试的控制台以及debug信息和error信息的打印
@@ -124,6 +118,9 @@ private:
 	WWINT WWscreenSizeX;
 	//屏幕的高度
 	WWINT WWscreenSizeY;
+	//显示器的dpi
+	WWFLOAT WWdpi;
+
 	/// <summary>
 	/// 通过成员变量WWwindowSize和WWwindowPos对窗口进行移动，以修改其大小和位置
 	/// </summary>
