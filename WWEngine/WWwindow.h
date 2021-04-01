@@ -6,10 +6,11 @@
 /// 文档描述：主窗体模块的头文件
 /// </summary>
 #pragma once
-#include <afx.h>
+#include<afx.h>
 #include <d2d1.h>
 #include<iostream>
 #include<ctime>
+#include"WWrenderer.h"
 #include"WWtype.h"
 #include"WWdefine.h"
 /// <summary>
@@ -117,6 +118,9 @@ private:
 	WWINT WWscreenSizeX;
 	//屏幕的高度
 	WWINT WWscreenSizeY;
+	//显示器的dpi
+	WWFLOAT WWdpi;
+
 	/// <summary>
 	/// 通过成员变量WWwindowSize和WWwindowPos对窗口进行移动，以修改其大小和位置
 	/// </summary>

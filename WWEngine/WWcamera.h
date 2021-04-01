@@ -1,6 +1,8 @@
 #pragma once
+#include<afx.h>
 #include"WWdefine.h"
 #include"WWobject.h"
+class WWobject;
 class WWcamera
 {
 private:
