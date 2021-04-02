@@ -1,8 +1,11 @@
 #include "WWrenderer.h"
+#include"WWrenderUnit.h"
+#include"WWwindow.h"
+#include"WWcamera.h"
 
 HWND WWrenderer::m_hwnd = NULL;
 WWcamera WWrenderer::camera;
-std::vector<WWrenderUnit>WWrenderer::renderlist;
+std::vector<WWrenderUnit*>WWrenderer::renderlist;
 ID2D1Factory* WWrenderer::fac = nullptr;
 ID2D1HwndRenderTarget* WWrenderer::rendertarget = nullptr;
 IDWriteFactory* WWrenderer::writefac = nullptr;
@@ -14,7 +17,7 @@ WWrenderer::~WWrenderer()
 	WWRELEASE(&rendertarget);
 }
 
-void WWrenderer::init(HWND hwnd)
+void WWrenderer::WWinit(HWND hwnd)
 {
 	m_hwnd = hwnd;
 	D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &fac);
@@ -34,12 +37,10 @@ void WWrenderer::update()
 	}
 	rendertarget->BeginDraw();
 	rendertarget->Clear(D2D1::ColorF(255, 255, 255, 1));
-	ID2D1SolidColorBrush* br;
-	rendertarget->CreateSolidColorBrush(
-		D2D1::ColorF(D2D1::ColorF::LightSlateGray),
-		&br
-	);
-	rendertarget->DrawLine(D2D1::Point2(1, 1), D2D1::Point2(500, 500), br);
+	for (auto it : renderlist)
+	{
+		it->WWrender();
+	}
 
 	rendertarget->EndDraw();
 }
@@ -52,6 +53,26 @@ void WWrenderer::WWreSize()
 		GetClientRect(m_hwnd, &rc);
 		rendertarget->Resize(D2D1::SizeU(rc.right - rc.left, rc.bottom - rc.top));
 	}
+}
+
+ID2D1Factory* WWrenderer::WWgetFac()
+{
+	return fac;
+}
+
+IDWriteFactory* WWrenderer::WWgetWriteFac()
+{
+	return writefac;
+}
+
+ID2D1HwndRenderTarget* WWrenderer::WWgetTar()
+{
+	return rendertarget;
+}
+
+void WWrenderer::WWaddUnit(WWrenderUnit* unit)
+{
+	renderlist.push_back(unit);
 }
 
 WWBOOL WWrenderer::createTarget()

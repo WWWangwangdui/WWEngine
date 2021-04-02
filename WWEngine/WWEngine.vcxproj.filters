@@ -39,6 +39,18 @@
     <ClCompile Include="WWrenderUnit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="WWkeyIOpp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWtransform.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWdirector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWtimer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWwindow.h">
@@ -66,6 +78,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="WWrenderUnit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWkeyIO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWtransform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWdirector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WWtimer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

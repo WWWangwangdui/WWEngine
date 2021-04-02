@@ -1,6 +1,13 @@
 #include "WWasCtrl.h"
-
-void WWasCtrl::WWinit()
+std::map<std::string, WWmoduleBase*>WWasCtrl::WWmodulemap;
+std::map<WWINT, WWSTR>WWasCtrl::WWstrMap;
+std::map<WWINT, WWBIT>WWasCtrl::WWbitMap;
+std::map<WWINT, WWSOUND*>WWasCtrl::WWsoundMap;
+WWSTR WWasCtrl::WWerrorStr;
+WWBIT WWasCtrl::WWerrorBit;
+WWSOUND* WWasCtrl::WWerrorSound;
+WWINT WWasCtrl::WWnextID;
+void WWasCtrl::init()
 {
 }
 
@@ -29,7 +36,7 @@ WWSTR& WWasCtrl::WWgetStr(WWINT WWid)
 	return WWerrorStr;
 }
 
-WWSOUND& WWasCtrl::WWgetSound(WWINT WWid)
+WWSOUND* WWasCtrl::WWgetSound(WWINT WWid)
 {
 	return WWerrorSound;
 }
@@ -37,6 +44,11 @@ WWSOUND& WWasCtrl::WWgetSound(WWINT WWid)
 WWBIT WWasCtrl::WWgetBit(WWINT WWid)
 {
 	return WWBIT();
+}
+
+WWmoduleBase* WWasCtrl::WWgetModule(std::string name)
+{
+	return nullptr;
 }
 
 

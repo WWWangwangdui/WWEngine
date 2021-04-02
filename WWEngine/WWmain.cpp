@@ -5,18 +5,19 @@
 /// 最后更新时间：2021/3/28
 /// 文档描述：软件入口
 /// </summary>
-#include<iostream>
-#include"WWwindow.h"
+#include"WWdefine.h"
 #include"WWrenderer.h"
+#include"WWwindow.h"
+#include"WWtimer.h"
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
 #ifdef _DEBUG
 	WWframe::createconsole();
+#endif // _DEBUG
 	time_t now = time(0);
 	tm* tmp = localtime(&now);
-#endif // _DEBUG
 	sprintf(WWframe::WWtime, "%d/%d/%d %d:%d:%d", tmp->tm_year + 1900, tmp->tm_mon + 1, tmp->tm_mday, tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
-	WWframe::WWlogPtr = fopen(WWframe::WWlogPath, "ab");
+	WWframe::WWlogPtr = fopen(WWframe::WWlogPath,"a");
 	HeapSetInformation(NULL, HeapEnableTerminationOnCorruption, NULL, 0);
 	if (!SUCCEEDED(CoInitialize(NULL)))
 	{
@@ -36,9 +37,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		wnd.WWshowWnd();
 		wnd.WWremMaxButton();
 		wnd.WWremMinButton();
-		WWrenderer::init(wnd.WWgetHWnd());
+		WWrenderer::WWinit(wnd.WWgetHWnd());
+		WWtimer::WWinit(wnd.WWgetHWnd());
 		WWframe::WWmsgCycle();
-		//WWLOG("程序正常结束\n\n");
+		WWLOG("程序正常结束\n\n");
 		delete[] WWframe::WWtime;
 		fclose(WWframe::WWlogPtr);
 	}

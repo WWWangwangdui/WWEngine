@@ -5,11 +5,21 @@
 /// 最后更新时间：2021/3/30
 /// 文档描述：主窗体模块的源文件
 /// </summary>
+#include"WWdefine.h"
 #include "WWwindow.h"
+#include"WWrenderer.h"
+#include"WWdirector.h"
+#include"WWtimer.h"
+#include"WWkeyIO.h"
+#include"WWrenderUnit.h"
+#include"WWobject.h"
+#include"WWtransform.h"
+#include"WWmoduleBase.h"
 WWCH* WWframe::WWtime = new WWCH[100];
 const WWCH* WWframe::WWlogPath = "log.txt";
 FILE* WWframe::WWlogPtr;
-
+WWDB WWframe::WWnextFrameTime = 0.0;
+std::priority_queue<WWkeyTimer> WWframe::WWkeyTimerQu;
 void WWwindow::WWMoveWindow()
 {
 	MoveWindow(WWhWnd, WWwindowPosX, WWwindowPosY, ceil(WWwindowSizeX * WWdpi / 96.0), ceil(WWwindowSizeY * WWdpi / 96.0), TRUE);
@@ -291,13 +301,53 @@ LRESULT WWframe::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 void WWframe::WWmsgCycle()
 {
 	MSG msg = { 0 };
+	WWnextFrameTime = WWtimer::WWgetTime() + (1000.0 / 60.0);
 	while (true)
 	{
+		if (WWkeyIO::WWgetSclick(WW_R))
+		{
+			int tmp = WWdirector::WWaddObj();
+			WWrenderUnit* unit = new WWrenderUnit();
+			WWobject* obj = WWdirector::WWfindObj(std::to_string(tmp).c_str());
+			WWtransform* trans = new WWtransform();
+			trans->WWsetPoint(rand() % 900, rand() % 600);
+			trans->WWsetRotate(rand() % 360);
+
+			obj->WWaddModule(trans);
+			obj->WWaddModule(unit);
+			unit->WWinit(obj);
+			WWGraph* gra = new WWGraph;
+			gra->col = RGB(rand() % 255, rand() % 255, rand() % 255);
+			gra->fill = true;
+			gra->pt1 = WWPT{ rand() % 900,rand() % 600 };
+			gra->pt2= WWPT{ rand() % 900,rand() % 600 };
+			gra->type = WW_SEL_RECT;
+			unit->WWsetUnitGraph(gra);
+
+		}
 		if (msg.message == WM_DESTROY || msg.message == WM_CLOSE || msg.message == WM_QUIT)
 		{
 			break;
 		}
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		WWDB timeNow = WWtimer::WWgetTime();
+		while (!WWkeyTimerQu.empty() && WWkeyTimerQu.top().ti <= timeNow)
+		{
+			WWkeyIO::WWonTimer(WWkeyTimerQu.top().keyID, WWkeyTimerQu.top().clickTime);
+			WWkeyTimerQu.pop();
+		}
+		if (timeNow >= WWnextFrameTime)
+		{
+			WWnextFrameTime += (1000.0 / 60.0);
+			if (timeNow < WWnextFrameTime + 10.0)
+			{
+				WWtimer::WWupdate();
+				WWdirector::WWupdate();
+			}
+		}
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) 
+		{
+			if (msg.message == WM_LBUTTONDOWN || msg.message == WM_LBUTTONUP || msg.message == WM_RBUTTONDOWN || msg.message == WM_RBUTTONUP || msg.message == WM_MBUTTONDOWN || msg.message == WM_MBUTTONUP || msg.message == WM_KEYDOWN || msg.message == WM_KEYUP || msg.message == WM_SYSKEYDOWN || msg.message == WM_SYSKEYUP)
+				WWkeyIO::WWkeyset(msg.hwnd, msg.message, msg.wParam, msg.lParam, timeNow);
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
@@ -314,6 +364,15 @@ void WWframe::WWlog(const WWCH* file, WWINT line, const WWCH* loginfo)
 void WWframe::WWlogNewLine()
 {
 	fprintf(WWframe::WWlogPtr, "\n");
+}
+
+void WWframe::WWaddKeyTimer(WWINT keyID, WWINT type)
+{
+	WWkeyTimer tmp;
+	tmp.keyID = keyID;
+	tmp.clickTime = type;
+	tmp.ti = WWtimer::WWgetTime() + 100.0;
+	WWkeyTimerQu.push(tmp);
 }
 
 void WWframe::createconsole()

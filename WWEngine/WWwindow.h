@@ -6,13 +6,8 @@
 /// 文档描述：主窗体模块的头文件
 /// </summary>
 #pragma once
-#include<afx.h>
-#include <d2d1.h>
-#include<iostream>
-#include<ctime>
-#include"WWrenderer.h"
 #include"WWtype.h"
-#include"WWdefine.h"
+
 /// <summary>
 /// WWframe类为提供主窗体框架的静态类，其功能主要包含窗体的回调函数、窗体的消息循环
 /// 在_DEBUG模式下，该类还会提供用于调试的控制台以及debug信息和error信息的打印
@@ -27,6 +22,10 @@ public:
 	static const WWCH* WWlogPath;
 	// 静态文件指针，指向日志文件
 	static FILE* WWlogPtr;
+	// 下一帧应该运行的时间，基于系统运行时间
+	static WWDB WWnextFrameTime;
+	// 键盘消息计时器队列
+	static std::priority_queue<WWkeyTimer>WWkeyTimerQu;
 	/// <summary>
 	/// 窗体的回调函数
 	/// </summary>
@@ -51,6 +50,12 @@ public:
 	/// 在日志文件中换一个空行
 	/// </summary>
 	static void WWlogNewLine();
+	/// <summary>
+	/// 添加键盘计时器
+	/// </summary>
+	/// <param name="keyID"></param>
+	/// <param name="type"></param>
+	static void WWaddKeyTimer(WWINT keyID, WWINT type);
 #ifdef _DEBUG
 public:
 	/// <summary>

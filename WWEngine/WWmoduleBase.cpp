@@ -5,17 +5,17 @@ void WWmoduleBase::WWsetModuleActivity(WWSEL sel)
 	WWactivity = sel;
 }
 
-WWINT WWmoduleBase::WWgetModulcID()
+WWINT WWmoduleBase::WWgetModuleID()
 {
 	return WWmoduleID;
 }
 
-WWSTR WWmoduleBase::WWgetModuleName()
+std::string& WWmoduleBase::WWgetModuleName()
 {
 	return WWmoduleName;
 }
 
-WWBOOL WWmoduleBase::WWfindModule(WWSTR modulename)
+WWBOOL WWmoduleBase::WWfindModule(std::string modulename)
 {
 	if ((this)->WWgetModuleName() == modulename)
 	{
